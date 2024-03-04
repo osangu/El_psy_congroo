@@ -1,31 +1,24 @@
-from app.database import LocalSession
+from sqlalchemy.orm import sessionmaker, Session
 
 
 class DAO:
-    """
-    By below code as using __call__,
-    you can manage Session without __init__, __enter__, __exit__
 
-    def __call__():
-        with LocalSession() as session:
-            self.session = session
-            try:
-                yield self
-            except Exception as e:
-                raise e
-            finally:
-                self.session.close()
-    """
+    def __init__(self, session_local: sessionmaker):
+        self.session: Session
+        self._session_local: sessionmaker
 
-    def __init__(self):
-        self.session = LocalSession()
+        self._session_local = session_local
 
     def __call__(self):
-        with self as repository:
-            yield repository
+        with self._session_local as session:
+            self.session: Session = session
 
-    def __enter__(self):
-        return self
+            try:
+                yield self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.session.close()
+            except Exception as e:
+                self.session.rollback()
+                raise e
+
+            finally:
+                self.session.close()

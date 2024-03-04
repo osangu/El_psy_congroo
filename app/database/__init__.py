@@ -1,8 +1,12 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, declarative_base
+# SQLAlchemy
+from sqlalchemy.engine import Engine
 
-from app.config import DatabaseConfig
+# Repository
+from app.database.repository import engine, SessionLocal, Repository
 
-Base = declarative_base()
-engine = create_engine(DatabaseConfig.URL)
-LocalSession = sessionmaker(bind=engine)
+# Model
+from app.database.model import create_all
+from app.database.model.user import User
+
+
+def create_all_table(bind: Engine): create_all(bind)
