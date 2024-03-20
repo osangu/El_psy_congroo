@@ -1,4 +1,7 @@
+from sqlalchemy.orm import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
+
+Base = declarative_base()
 
 
 class DAO:

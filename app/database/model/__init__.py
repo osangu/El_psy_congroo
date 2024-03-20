@@ -1,4 +1,4 @@
-from app.database.model.abc import Base
+from app.database.abc import Base
 
 
 def create_all(engine):
