@@ -21,3 +21,25 @@ def authorization(jwt_token: str = Depends()) -> AuthInfo:
         user_id=payload.sub,
         role=Role(payload.role)
     )
+
+
+class AuthProperties:
+    _authorization_url = {
+        "/users/token": {
+            "PUT": [Role.USER]
+        },
+        "/users/me": {
+            "GET": [Role.USER]
+        }
+    }
+
+    @staticmethod
+    def role_list(path: str, method: str):
+        method_dict = AuthProperties._authorization_url.get(path)
+
+        if method_dict is None:
+            return None
+
+        return method_dict.get(method)
+
+        # return None if method_dict is None else method_dict.get(path)
