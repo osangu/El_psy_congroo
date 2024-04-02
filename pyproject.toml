@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "fastapi-essence"
+version = "0.1.0"
+description = ""
+authors = ["osangu <osangu.dev@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.9"
+annotated-types = "0.6.0"
+anyio = "4.3.0"
+bidict = "0.23.1"
+click = "8.1.7"
+exceptiongroup = "1.2.0"
+fastapi = "0.110.1"
+fastapi-socketio = "0.0.10"
+greenlet = "3.0.3"
+h11 = "0.14.0"
+idna = "3.6"
+pydantic = "2.6.4"
+pydantic-core = "2.16.3"
+python-engineio = "4.9.0"
+python-socketio = "5.11.2"
+simple-websocket = "1.0.0"
+sniffio = "1.3.1"
+sqlalchemy = "2.0.29"
+starlette = "0.37.2"
+typing-extensions = "4.10.0"
+uvicorn = "0.29.0"
+wsproto = "1.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
