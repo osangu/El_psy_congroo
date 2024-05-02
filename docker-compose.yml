@@ -1,0 +1,22 @@
+  services:
+    redis:
+      image: redis:latest
+      ports:
+        - 6379:6379
+      command: ["redis-server", "--requirepass", $REDIS_PASSWORD]
+
+    postgresql:
+      image: postgres:latest
+      restart: always
+      ports:
+        - 54321:5432
+      volumes:
+        - postgres_volume:/var/lib/postgresql/data
+      environment:
+        TZ: Asia/Seoul
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+
+  volumes:
+    postgres_volume:
+
