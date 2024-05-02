@@ -7,6 +7,8 @@
 
 ----
 TODO
+- [ ] poetry export --without-hashes > requirements.txt
+
 - [ ] 로그인 횟수 제한
 - [ ] Deploy Status 별 config 적용
 - [ ] 코드 수정이 필요 없는 DI
