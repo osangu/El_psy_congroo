@@ -1,22 +1,32 @@
-  services:
-    redis:
-      image: redis:latest
-      ports:
-        - 6379:6379
-      command: ["redis-server", "--requirepass", $REDIS_PASSWORD]
+services:
+  app:
+    build: .
+    ports:
+      - 8000:8000
+    depends_on:
+      - redis
+      - postgresql
+    env_file:
+      - "${PROFILE_STATUS}"
 
-    postgresql:
-      image: postgres:latest
-      restart: always
-      ports:
-        - 54321:5432
-      volumes:
-        - postgres_volume:/var/lib/postgresql/data
-      environment:
-        TZ: Asia/Seoul
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: postgres
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    command: ["redis-server", "--requirepass", "$REDIS_PASSWORD"]
 
-  volumes:
-    postgres_volume:
+  postgresql:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 54321:5432
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data
+    environment:
+      TZ: Asia/Seoul
+      POSTGRES_USER: "${DATABASE_USERNAME}"
+      POSTGRES_PASSWORD: "${DATABASE_PASSWORD}"
+
+volumes:
+  postgres_volume:
 
