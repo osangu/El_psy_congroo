@@ -2,16 +2,18 @@ from fastapi import Depends, Header
 from fastapi.security import HTTPBearer
 from fastapi.security import HTTPAuthorizationCredentials as Credentials
 
+from .token import JWTDecoder
+
 access_token_capture = HTTPBearer()
 
 
 class Authorization:
 
-    def __init__(self, decoder: None = Depends(None)):
+    def __init__(self, decoder: JWTDecoder = Depends(JWTDecoder)):
         self.decoder = decoder
 
     def __call__(self, jwt_prefix: str) -> int:
-        user_id = self.decoder(jwt_prefix)
+        user_id = self.decoder.access_token(jwt_prefix)
 
         # check in redis
 

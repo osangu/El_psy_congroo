@@ -6,10 +6,10 @@ from ..swagger import SwaggerDetails
 from app.core.service.user import UserService
 from app.security.auth import Authorization
 
-user_router = APIRouter(prefix="/users")
+router = APIRouter(prefix="/users")
 
 
-@user_router.post(
+@router.post(
     **SwaggerDetails.register,
     response_model=None,
     status_code=202,
@@ -26,7 +26,7 @@ def user_sign_up(
     )
 
 
-@user_router.post(
+@router.post(
     **SwaggerDetails.login,
     response_model=None,
     status_code=200,
@@ -38,7 +38,7 @@ def user_login(
     pass
 
 
-@user_router.get(
+@router.get(
     path='/me'
 )
 def user_get_profile(
