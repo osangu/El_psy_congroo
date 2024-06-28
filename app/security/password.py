@@ -1,12 +1,15 @@
+from passlib.context import CryptContext
+
+pwd_context = CryptContext()
 
 
 class PasswordEncoder:
 
     def __call__(self, password):
-        pass
+        return pwd_context.hash(password)
 
 
-class PasswordValidator:
+class PasswordVerifier:
 
     def __call__(self, plain_password: str, hashed_password: str) -> bool:
-        pass
+        return pwd_context.verify(plain_password, hashed_password)
