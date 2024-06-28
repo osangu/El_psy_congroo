@@ -1,6 +1,9 @@
+from http import HTTPStatus
+
 from fastapi import APIRouter, Depends
 
 from .schema.request import UserRegisterRequest
+from .schema.response import UserRegisterResponse
 from ..swagger import SwaggerDetails
 
 from app.core.service.user import UserService
@@ -11,17 +14,17 @@ router = APIRouter(prefix="/users")
 
 @router.post(
     **SwaggerDetails.register,
-    response_model=None,
-    status_code=202,
-    path='/register',
+    response_model=UserRegisterResponse,
+    status_code=HTTPStatus.CREATED,
+    path="/register",
 )
 def user_sign_up(
         request: UserRegisterRequest,
         service: UserService.register = Depends(UserService.register)
 ):
-    service(
-        service.DTO(
-            **request.model_dump()
+    return service(
+        service.Input(
+            **request.model_dump(),
         )
     )
 
