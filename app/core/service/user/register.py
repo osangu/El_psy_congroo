@@ -1,6 +1,7 @@
 from fastapi import Depends
 from pydantic import BaseModel
 
+from app.facade.orm import Repository
 from app.core.model.user import User
 from app.security.token import JWTEncoder
 from app.security.password import PasswordEncoder
@@ -29,9 +30,9 @@ class UserRegister:
 
     def __init__(
             self,
-            repository,
             jwt_encoder: JWTEncoder = Depends(JWTEncoder),
-            password_encoder: PasswordEncoder = Depends(PasswordEncoder)
+            repository: Repository.user = Depends(Repository.user),
+            password_encoder: PasswordEncoder = Depends(PasswordEncoder),
     ):
         self.repository = repository
         self.jwt_encoder = jwt_encoder
@@ -52,7 +53,7 @@ class UserRegister:
             access_token=access_token,
             access_token_exp=access_exp,
             refresh_token=refresh_token,
-            refresh_exp=refresh_exp,
+            refresh_token_exp=refresh_exp,
         )
 
     def _check_user_in_db(self, email: str):
