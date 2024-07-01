@@ -12,6 +12,11 @@ class UserDAO(DAO):
 
         return user
 
+    def find_by_id(self, user_id: int) -> Optional[User]:
+        user = self.session.query(User).where(User.id == user_id).scalar()
+
+        return user
+
     def find_by_email(self, email: str) -> Optional[User]:
         user = self.session.query(User).where(User.email == email).scalar()
 

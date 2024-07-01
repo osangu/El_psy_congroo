@@ -3,4 +3,4 @@ from .abc import session
 
 
 class Repository:
-    user = UserDAO(session=session)
+    user: UserDAO = UserDAO(session=session)

@@ -10,3 +10,8 @@ class UserRegisterResponse(BaseModel):
 
     refresh_token: str
     refresh_token_exp: float
+
+
+class UserProfileResponse(BaseModel):
+    name: str
+    email: str

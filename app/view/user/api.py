@@ -3,7 +3,7 @@ from http import HTTPStatus
 from fastapi import APIRouter, Depends
 
 from .schema.request import UserRegisterRequest
-from .schema.response import UserRegisterResponse
+from .schema.response import UserRegisterResponse, UserProfileResponse
 from ..swagger import SwaggerDetails
 
 from app.core.service.user import UserService
@@ -42,9 +42,13 @@ def user_login(
 
 
 @router.get(
+    **SwaggerDetails.profile,
+    response_model=UserProfileResponse,
+    status_code=200,
     path='/me'
 )
 def user_get_profile(
-        user_id: int = Depends(Authorization.bearer)
+        user_id: int = Depends(Authorization.bearer),
+        service: UserService.profile = Depends(UserService.profile)
 ):
-    pass
+    return service(user_id)
