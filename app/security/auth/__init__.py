@@ -5,7 +5,7 @@ from fastapi.security import HTTPBearer
 from fastapi.security import HTTPAuthorizationCredentials as Credentials
 
 from .abc import Auth
-from .basic import BasicAuth
+from .bearer import BearerAuth
 
 access_token_capture = HTTPBearer()
 
@@ -14,7 +14,7 @@ class Authorization:
 
     @staticmethod
     def bearer(
-            auth: Auth = Depends(BasicAuth),
+            auth: Auth = Depends(BearerAuth),
             jwt: Credentials = Depends(access_token_capture)
     ) -> int:
         suffix, prefix = jwt.scheme, jwt.credentials
@@ -23,7 +23,7 @@ class Authorization:
 
     @staticmethod
     def header(
-            auth: Auth = Depends(BasicAuth),
+            auth: Auth = Depends(BearerAuth),
             jwt: str = Header(alias='Authorization')
     ) -> int:
         suffix, prefix = jwt.split()

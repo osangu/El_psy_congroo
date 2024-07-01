@@ -8,13 +8,14 @@ from jwt.exceptions import (InvalidKeyError,
                             InvalidAlgorithmError)
 
 from .data import Payload
+from app.config import JWTConfig
 
 
 class Decoder:
 
     def __call__(self, jwt: str, key: str) -> Optional[Payload]:
         try:
-            payload_dict = decode(jwt=jwt, key=key)
+            payload_dict = decode(jwt=jwt, key=key, algorithms=JWTConfig.ALGORITHM)
 
             return Payload(**payload_dict)
 
@@ -28,7 +29,7 @@ class Decoder:
             raise InvalidError
 
     def access_token(self, jwt: str) -> Optional[Payload]:
-        return self(jwt=jwt, key="")
+        return self(jwt=jwt, key=JWTConfig.ACCESS_KEY)
 
     def refresh_token(self, jwt: str) -> Optional[Payload]:
         return self(jwt=jwt, key="")

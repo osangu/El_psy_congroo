@@ -4,7 +4,7 @@ from .abc import Auth
 from ..token import JWTDecoder, Payload
 
 
-class BasicAuth(Auth):
+class BearerAuth(Auth):
 
     def __init__(self, jwt_decoder: JWTDecoder = Depends(JWTDecoder)):
         self.jwt_decoder = jwt_decoder

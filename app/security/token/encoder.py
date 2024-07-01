@@ -21,12 +21,12 @@ class Encoder:
         return token, exp
 
     def access_token(self, user_id: int) -> Tuple[str, float]:
-        utc = datetime.utcnow()
+        utc = datetime.utcnow() + timedelta(hours=9)
         term = timedelta(seconds=JWTConfig.ACCESS_EXP)
 
         exp = (utc + term).timestamp()
 
-        return self(user_id, key="", exp=exp)
+        return self(user_id, key=JWTConfig.ACCESS_KEY, exp=exp)
 
     def refresh_token(self, user_id: int) -> Tuple[str, float]:
         utc = datetime.utcnow()
