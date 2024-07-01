@@ -12,7 +12,7 @@ class DatabaseConfig:
     _USER_NAME = os.environ["DATABASE_USER_NAME"]
     _USER_PASSWORD = os.environ["DATABASE_USER_PASSWORD"]
 
-    URL = f"{_RDBMS}+{_DRIVER}://{_USER_NAME}:{_USER_PASSWORD}:{_HOST}:{_PORT}/{_NAME}"
+    URL = f"{_RDBMS}+{_DRIVER}://{_USER_NAME}:{_USER_PASSWORD}@{_HOST}:{_PORT}/{_NAME}"
 
 
 class JWTConfig:
