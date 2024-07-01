@@ -1,6 +1,7 @@
 from fastapi import Depends
 from pydantic import BaseModel
 
+from app.exception import NOT_FOUND_EXCEPTION
 from app.facade.orm import Repository
 
 
@@ -22,7 +23,7 @@ class UserProfile:
         user = self.user_repository.find_by_id(user_id)
 
         if user is None:
-            raise
+            raise NOT_FOUND_EXCEPTION("USER_NOT_FOUND")
 
         return self.Output(
             name=user.name,

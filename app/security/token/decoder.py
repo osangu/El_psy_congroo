@@ -9,6 +9,7 @@ from jwt.exceptions import (InvalidKeyError,
 
 from .data import Payload
 from app.config import JWTConfig
+from ...exception import FORBIDDEN_EXCEPTION
 
 
 class Decoder:
@@ -19,14 +20,14 @@ class Decoder:
 
             return Payload(**payload_dict)
 
-        except ExpiredSignatureError as ExpiredError:
-            raise ExpiredError
+        except ExpiredSignatureError:
+            raise FORBIDDEN_EXCEPTION("EXPIRED_REQUEST_ARRIVED")
 
         except (
                 InvalidKeyError, InvalidSignatureError,
                 InvalidTokenError, InvalidAlgorithmError
-        ) as InvalidError:
-            raise InvalidError
+        ):
+            raise FORBIDDEN_EXCEPTION("INVALID_REQUEST_ARRIVED")
 
     def access_token(self, jwt: str) -> Optional[Payload]:
         return self(jwt=jwt, key=JWTConfig.ACCESS_KEY)

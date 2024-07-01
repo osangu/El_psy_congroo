@@ -1,6 +1,7 @@
 from fastapi import Depends
 from pydantic import BaseModel
 
+from app.exception import ALREADY_EXIST_EXCEPTION
 from app.facade.orm import Repository
 from app.core.model.user import User
 from app.security.token import JWTEncoder
@@ -60,7 +61,7 @@ class UserRegister:
         user_in_db = self.repository.find_by_email(email)
 
         if user_in_db is not None:
-            raise
+            raise ALREADY_EXIST_EXCEPTION("USER_ALREADY_EXIST")
 
     def _create_user_and_save(self, dto: Input, hash_password: str):
         user = User(name=dto.name, email=dto.email, password=hash_password)
