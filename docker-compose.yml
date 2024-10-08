@@ -1,5 +1,7 @@
 version: "3"
 
+name: hello-fastapi
+
 services:
   database:
     image: postgres
