@@ -3,7 +3,8 @@ from typing import List
 
 
 class Tags(str, Enum):
-    USER = 'User'
+    USER = "User"
+    ALBUM = "Album"
 
 
 class SwaggerDetail(dict):
@@ -18,6 +19,4 @@ class SwaggerDetail(dict):
 
 
 class SwaggerDetails:
-    login = SwaggerDetail(summary='로그인', tags=[Tags.USER])
-    register = SwaggerDetail(summary='회원가입', tags=[Tags.USER])
-    profile = SwaggerDetail(summary='내 정보 조회', tags=[Tags.USER])
+    publish_album = SwaggerDetail(summary='음원 출판', tags=[Tags.ALBUM])
