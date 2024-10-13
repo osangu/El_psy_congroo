@@ -12,9 +12,7 @@ class DatabaseConfig:
     _USER_NAME = os.environ["DATABASE_USER_NAME"]
     _USER_PASSWORD = os.environ["DATABASE_USER_PASSWORD"]
 
-    URL = f"{_RDBMS}+{_DRIVER}://{_USER_NAME}:{_USER_PASSWORD}@{_HOST}:{_PORT}/{_NAME}"
-
-
+    URL = f"{_RDBMS}+{_DRIVER}://{_USER_NAME}:{_USER_PASSWORD}@{_HOST}:{_PORT}/{_NAME
 class JWTConfig:
     ALGORITHM = os.environ["JWT_ALGORITHM"]
 
@@ -25,3 +23,7 @@ class JWTConfig:
     REFRESH = os.environ["JWT_REFRESH"]
     REFRESH_KEY = os.environ["JWT_REFRESH_KEY"]
     REFRESH_EXP = int(os.environ["JWT_REFRESH_EXP"])  # sec
+
+
+class SecurityConfig:
+    SOLT = os.environ['HASH_SOLT']
