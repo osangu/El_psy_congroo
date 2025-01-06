@@ -1,1 +1,0 @@
-> [FastAPI File Check](https://codingdog.tistory.com/entry/fastapi-%ED%8C%8C%EC%9D%BC-%EC%82%AC%EC%9D%B4%EC%A6%88-%EC%A0%9C%ED%95%9C%EC%9D%84-%EA%B2%80%EC%82%AC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95%EC%9D%84-%EC%95%8C%EC%95%84%EB%B4%85%EC%8B%9C%EB%8B%A4)
