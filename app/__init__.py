@@ -2,6 +2,8 @@ from contextlib import asynccontextmanager
 from typing import Callable
 from fastapi import FastAPI
 
+from .security import include_cors_middleware
+
 
 def create_app(lifespan: Callable):
     app = FastAPI(lifespan=lifespan)
@@ -12,7 +14,7 @@ def create_app(lifespan: Callable):
     """
 
     # include_routers()
-    # include_middlewares()
+    include_cors_middleware(app)
 
     return app
 
