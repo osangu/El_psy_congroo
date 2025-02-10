@@ -19,4 +19,9 @@ def create_app(lifespan: Callable):
 
 @asynccontextmanager
 def lifespan(_: FastAPI):
+    # init_document_db()
+    # init_rdb()
+
     yield
+
+    # cleaning some stuff
