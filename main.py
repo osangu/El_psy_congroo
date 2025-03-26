@@ -1,6 +1,6 @@
-from app import create_app, lifespan
+from app import create_app
 
-app = create_app(lifespan=lifespan)
+app = create_app()
 
 if __name__ == '__main__':
     from uvicorn import run
