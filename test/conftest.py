@@ -1,10 +1,16 @@
 from contextlib import asynccontextmanager
 
 import pytest_asyncio
+
+from httpx import AsyncClient
+from asgi_lifespan import LifespanManager
 from testcontainers.redis import RedisContainer
 from testcontainers.postgres import PostgresContainer
 
 from app import create_app
+
+from app.adapter.repository.cache import CacheRepositoryImpl
+from app.adapter.repository.rdb import init_rdb_repository
 
 
 @pytest_asyncio.fixture(scope='session')
@@ -33,8 +39,8 @@ async def client(
 
     @asynccontextmanager
     async def lifespan():
-        init_rdb(mock_postgres_url)
-        init_cache_db(redis_host, redis_port, redis_password)
+        init_rdb_repository(mock_postgres_url)
+        CacheRepositoryImpl.__init__(redis_host, redis_port, redis_password)
 
         yield
 
