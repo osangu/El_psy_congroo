@@ -5,25 +5,20 @@ from redis import StrictRedis
 from app.abc.repository.cache import CacheRepository
 
 
+def init_cache_client(
+        host: str,
+        port: int,
+        password: str
+):
+    CacheRepositoryImpl.client = StrictRedis(
+        host=host,
+        port=port,
+        password=password
+    )
+
+
 class CacheRepositoryImpl(CacheRepository):
-
-    @staticmethod
-    def __init__(
-            host: str,
-            port: str,
-            password: str,
-            client: Optional[str] = None
-    ):
-        if client is None:
-            client = StrictRedis(
-                host=host,
-                port=port,
-                password=password
-            )
-
-        CacheRepositoryImpl.client = client
-
-    client: StrictRedis = None
+    client: Optional[StrictRedis] = None
 
     def save(self, *args, **kwargs):
         pass

@@ -3,17 +3,6 @@ from abc import ABC, abstractmethod
 
 
 class CacheRepository(ABC):
-    client: Any = None
-
-    @staticmethod
-    @abstractmethod
-    def __init__(
-            host: str,
-            port: str,
-            password: str,
-            client: Optional[Any] = None
-    ):
-        raise NotImplementedError
 
     @abstractmethod
     def save(self, *args, **kwargs):
