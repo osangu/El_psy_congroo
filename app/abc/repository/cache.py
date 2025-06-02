@@ -1,4 +1,3 @@
-from typing import Any, Optional
 from abc import ABC, abstractmethod
 
 

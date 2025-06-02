@@ -20,24 +20,24 @@ class Client:
                 raise e
 
 
-def init_rdb_client(
-        host: str = None,
-        port: str = None,
-        name: str = None,
-        username: str = None,
-        password: str = None,
+# TODO: set params default as RDBConfig
+def init_rdb(
+        host: str,
+        port: str,
+        name: str,
+        username: str,
+        password: str,
         url: str = None,
-        init_table: bool = False
+        dbms: str = 'postgres',
+        driver: str = 'psycopg2'
 ):
-    if not url:
-        url = ''
+    from . import entity
+
+    if url is None:
+        url = f'{dbms}+{driver}://{username}:{password}@{host}:{port}/{name}'
 
     engine = create_engine(url)
+
+    entity.init(engine=engine)
+
     Client.session = sessionmaker(bind=engine, autoflush=False)
-
-    if init_table:
-        _create_table(engine)
-
-
-def _create_table(engine):
-    pass
